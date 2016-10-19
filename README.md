@@ -8,6 +8,7 @@ This repository is used to demonstrate a working knowledge of reading in, cleani
 This function extracts data from the UCI Machine Learning Respository's "Human Activity Recognition Using Smartphone Dataset".
   link - http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 This function does the following:
+
 1. Loads the data into your working directory
 2. Extracts only the mean and standard deviation measurements for each measurement variable
   a. Note - mean and standard deviation variables are taken to mean ONLY variables that have mean() or std(), not including any variables   that have gravitymean, meanFreq, etc. as these were interpreted as being different from an explicit mean of a measurement variable 
