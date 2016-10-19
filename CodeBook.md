@@ -76,4 +76,4 @@ The complete list of variables of each feature vector is available in 'features.
 website <- http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 
 data <- https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
-- *Note* : 'features_info.txt' and 'README.txt' files from dataset used for **Study Description** and **Variables and Features** description.
+- *Note* : 'features_info.txt' and 'README.txt' files from dataset used for **Study Description** and **Features and Variables** description.
