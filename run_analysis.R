@@ -5,9 +5,11 @@ if (!dir.exists("UCI HAR Dataset")) {download.file(url, "uci.zip", "curl")}
 unzip("uci.zip")
 setwd("./UCI HAR Dataset")
 
+
 # get necessary packages
 library(dplyr)
 library(reshape2)
+
 
 #download individual files according to their specific constraints
 features <- read.table("features.txt", sep = " ", col.names = c("featureid", "feature"))
@@ -20,11 +22,9 @@ dataTrain <- read.table("./train/X_train.txt")
 dataTest <- read.table("./test/X_test.txt")
 
 
-
 # rename column names for dataTest and dataTrain
 colnames(dataTrain) <- as.character(features$feature)
 colnames(dataTest) <- as.character(features$feature)
-
 
 
 # 1. rbind() analagous datasets into data frames
@@ -32,22 +32,26 @@ combinedData <- rbind(dataTrain, dataTest)
 combinedActivity <- rbind(activityTrain, activityTest)
 combinedSubject <- rbind(subjectTrain, subjectTest)
 
+
 # 2. Acceptable colnames for data; the interpretation of "measurements on mean and standard deviation
 # was taken to mean that only the explicit columns where mean() and std() occurred
 # should be extracted from the dataset, not meanFreq() or gravityMean, etc.
 names <- grep("mean\\(\\)|std\\(\\)",names(combinedData), value = TRUE)
 combinedData2 <-combinedData[,names]
 
+
 # 3., 4. merge() data from activitylabels and combinedActivity to get activity labels
 # lined up with activity data
 aggregateData <- cbind(combinedSubject,combinedActivity, combinedData2)
 aggregateData2 <- merge(activitylabels, aggregateData, by="activityid")
+
 
 # 5. Other tidy data that gives averages of each variable for each subject AND activity; the narrow form of tidy
 # data was used
 meltAggregateData <- melt(aggregateData2, id.vars = c("subjectid", "activityid", "activity"))
 avgVariableSubject <- meltAggregateData %>% select(subjectid, activity, variable, value) %>% rename(measurement = variable) %>%
     group_by(subjectid, activity, measurement) %>% summarize(avgValue = mean(value))
+
 
 write.table(aggregateData2, "aggregateTidyData.txt", row.names = FALSE)
 write.table(avgVariableSubject, "averageTidyData.txt", row.names=FALSE)
