@@ -16,5 +16,5 @@ This function does the following:
 ## CodeBook.md
 This file describes the variables, data and transformations that were made to clean up the original data set from UCI.
 
-## aggregateTidyData.txt
+## averageTidyData.txt
 This file gives the first 16 lines of the data for the averageTidyData.txt file. 
